@@ -28,14 +28,14 @@ class Final extends Component {
                         alt="Quiz completed"
                     />
                     <div className="message-box">
-                        <p>Quiz completed! Your place:</p>
+                        <p>Quiz terminé ! Votre place :</p>
                         <p style={{ fontSize: "3.5em", fontWeight: "bold" }}>{place}</p>
                         <p>
-                            <span style={{ paddingRight: "1em" }}>Points: {totalPoints}</span>
+                            <span style={{ paddingRight: "1em" }}>Points : {totalPoints}</span>
                             <span>|</span>
-                            <span style={{ paddingLeft: "1em", paddingRight: "1em" }}>Speed: {speed}</span>
+                            <span style={{ paddingLeft: "1em", paddingRight: "1em" }}>Vitesse : {speed}</span>
                             <span>|</span>
-                            <span style={{ paddingLeft: "1em" }}>Players: {this.props.stats.length}</span>
+                            <span style={{ paddingLeft: "1em" }}>Joueurs : {this.props.stats.length}</span>
                         </p>
                     </div>
                 </CenterBox >

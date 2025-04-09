@@ -8,10 +8,10 @@ import "../../assets/icons/material-ui-icon.css";
 class RoomNotFound extends Component {
     render() {
         return (
-            <CenterBox logo cancel="Return to menu" {...this.props}>
+            <CenterBox logo cancel="Retour au menu" {...this.props}>
                 <img src={Warning} className="material-ui-icon" style={{ fontSize: "4.5em" }} alt="Add" />
                 <div className="message-box">
-                    Room with code {this.props.game.roomCode} was not found!
+                    La salle avec le code {this.props.game.roomCode} n'a pas été trouvée !
                 </div>
             </CenterBox>
         );

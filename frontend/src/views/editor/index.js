@@ -126,7 +126,7 @@ class Editor extends Component {
         this.setState({ downloadModal: false, downloadModalMessage: undefined });
         let name = this.state.originalName;
         if (name === "") {
-            name = prompt("Enter the project name or leave the field empty:");
+            name = prompt("Entrez le nom du projet ou laissez le champ vide :");
             if (name === '') {
                 name = 'questions.json';
             } else {
@@ -202,49 +202,49 @@ class Editor extends Component {
 
     topButtonsConfig = () => [
         {
-            text: "Exit",
-            icon: <img src={Close} className="material-ui-icon" alt="Close" />,
+            text: "Quitter",
+            icon: <img src={Close} className="material-ui-icon" alt="Fermer" />,
             click: this.exitButton
         },
         {
             customUpload: true,
-            text: "Upload",
-            icon: <img src={Publish} className="material-ui-icon" alt="Upload" />,
+            text: "Importer",
+            icon: <img src={Publish} className="material-ui-icon" alt="Importer" />,
             click: this.uploadFile
         },
         {
             variant: this.state.workspace.length === 0 || !this.state.changed ? null : 'success',
-            text: "Download",
-            icon: <img src={GetApp} className="material-ui-icon" alt="Download" />,
+            text: "Télécharger",
+            icon: <img src={GetApp} className="material-ui-icon" alt="Télécharger" />,
             click: this.downloadButton,
             disabled: this.state.workspace.length === 0 || !this.state.changed
         },
         {
-            text: "Move up",
-            icon: <img src={ArrowUpward} className="material-ui-icon" alt="Move up" />,
+            text: "Monter",
+            icon: <img src={ArrowUpward} className="material-ui-icon" alt="Monter" />,
             click: () => this.moveQuestion(-1),
             disabled: this.state.selectedIndex < 1
         },
         {
-            text: 'Move down',
-            icon: <img src={ArrowDownward} className="material-ui-icon" alt="Move down" />,
+            text: 'Descendre',
+            icon: <img src={ArrowDownward} className="material-ui-icon" alt="Descendre" />,
             click: () => this.moveQuestion(1),
             disabled: this.state.selectedIndex < 0 || this.state.selectedIndex + 1 === this.state.workspace.length
         },
         {
-            text: 'Delete',
-            icon: <img src={DeleteForever} className="material-ui-icon" alt="Delete" />,
+            text: 'Supprimer',
+            icon: <img src={DeleteForever} className="material-ui-icon" alt="Supprimer" />,
             click: this.deleteQuestion,
             disabled: this.state.selectedIndex < 0
         },
         {
-            text: 'Add here',
-            icon: <img src={AddBox} className="material-ui-icon" alt="Add here" />,
+            text: 'Ajouter ici',
+            icon: <img src={AddBox} className="material-ui-icon" alt="Ajouter ici" />,
             click: () => this.addQuestion(true)
         },
         {
-            text: 'Add at the end',
-            icon: <img src={AddBox} className="material-ui-icon" alt="Add at the end" />,
+            text: 'Ajouter à la fin',
+            icon: <img src={AddBox} className="material-ui-icon" alt="Ajouter à la fin" />,
             click: () => this.addQuestion(false)
         }
     ];
@@ -264,7 +264,7 @@ class Editor extends Component {
         return (
             <CenterBox {...this.props}>
                 <div className="message-box d-block d-sm-block d-md-none">
-                    Resolution of the browser is too low to launch the question editor!
+                    La résolution du navigateur est trop faible pour lancer l'éditeur de questions !
                 </div>
                 <Container fluid className="editor-container d-none d-sm-none d-md-block">
                     <Row style={{ height: '100%' }}>
@@ -278,7 +278,7 @@ class Editor extends Component {
                                 <Container fluid>
                                     <Row style={{ padding: "20px 10px 20px 10px" }}>
                                         <Col lg={4} md={6} style={{ textAlign: "center" }}>
-                                            Quiz title:
+                                            Quiz titre :
                                         </Col>
                                         <Col lg={8} md={6}>
                                             <Form.Control
@@ -286,7 +286,7 @@ class Editor extends Component {
                                                 value={this.state.title}
                                                 onChange={this.onTitleChange}
                                                 className={this.state.title ? '' : 'missing-title'}
-                                                placeholder="Quiz Title"
+                                                placeholder="Titre du Quiz"
                                                 maxLength="200"
                                             />
                                         </Col>
@@ -344,64 +344,64 @@ class Editor extends Component {
 
                 <Modal show={this.state.exitModal} onHide={this.hideExitModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Warning</Modal.Title>
+                        <Modal.Title>Attention</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Unsaved changes detected in the project!<br />Are you sure you want to exit the editor?</p>
+                        <p>Modifications non sauvegardées détectées dans le projet !<br />Êtes-vous sûr de vouloir quitter l'éditeur ?</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" onClick={this.navigateToStartPage}>Yes, leave</Button>
+                        <Button variant="danger" onClick={this.navigateToStartPage}>Oui, quitter</Button>
                         <Button variant="secondary" onClick={this.hideExitModal}>
-                            No, cancel
+                            Non, annuler
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
                 <Modal show={this.state.deleteModal} onHide={this.hideDeleteModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Warning</Modal.Title>
+                        <Modal.Title>Attention</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Are you sure you want to delete this question?</p>
+                        <p>Êtes-vous sûr de vouloir supprimer cette question ?</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" onClick={this.deleteQuestionWithoutConfirmation}>Yes, delete</Button>
+                        <Button variant="danger" onClick={this.deleteQuestionWithoutConfirmation}>Oui, supprimer</Button>
                         <Button variant="secondary" onClick={this.hideDeleteModal}>
-                            No, cancel
+                            Non, annuler
                         </Button>
                     </Modal.Footer>
                 </Modal>
 
                 <Modal show={this.state.uploadModal} onHide={this.cancelUpload}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Warning</Modal.Title>
+                        <Modal.Title>Attention</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p>Are you sure you want to load a new project? You have unsaved changes in the current one!</p>
+                        <p>Êtes-vous sûr de vouloir charger un nouveau projet ? Vous avez des modifications non sauvegardées dans le projet actuel !</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" onClick={this.loadProject}>Yes, upload new project</Button>
-                        <Button variant="secondary" onClick={this.cancelUpload}>No, cancel</Button>
+                        <Button variant="danger" onClick={this.loadProject}>Oui, importer le nouveau projet</Button>
+                        <Button variant="secondary" onClick={this.cancelUpload}>Non, annuler</Button>
                     </Modal.Footer>
                 </Modal>
 
                 <Modal show={this.state.downloadModal} onHide={this.cancelDownload}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Warning</Modal.Title>
+                        <Modal.Title>Attention</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <p>
                             {this.state.downloadModalMessage}.
                         </p>
                         <p>
-                            Do you still want to download the quiz?
-                            You can re-upload and continue editing it later -
-                            but you won't be able to host the quiz.
+                            Voulez-vous quand même télécharger le quiz ?
+                            Vous pourrez le réimporter et continuer à l'éditer plus tard -
+                            mais vous ne pourrez pas l'héberger.
                         </p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" onClick={this.downloadFile}>Yes, download anyway</Button>
-                        <Button variant="secondary" onClick={this.cancelDownload}>No, cancel</Button>
+                        <Button variant="danger" onClick={this.downloadFile}>Oui, télécharger quand même</Button>
+                        <Button variant="secondary" onClick={this.cancelDownload}>Non, annuler</Button>
                     </Modal.Footer>
                 </Modal>
             </CenterBox>

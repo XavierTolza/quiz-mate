@@ -105,7 +105,7 @@ class Main extends Component {
                                             buttonClassName="reconnect-btn equal-width"
                                             buttonStyle={{ width: "100%", maxWidth: "18rem" }}
                                             icon={Power}
-                                            label="Rejoin previous game"
+                                            label="Rejoindre la partie précédente"
                                             onClick={this.reconnect}
                                         />
                                     </div>
@@ -114,7 +114,7 @@ class Main extends Component {
                                     type="text"
                                     value={this.state.playerName}
                                     onChange={this.onNameChanged}
-                                    placeholder="Name"
+                                    placeholder="Nom"
                                     ref={this.userNameReference}
                                     onKeyPress={this.onInputFieldKeyEvent}
                                     maxLength="40"
@@ -126,14 +126,14 @@ class Main extends Component {
                                     onChange={this.changeRoomCode}
                                     ref={this.roomCodeReference}
                                     onKeyPress={this.onInputFieldKeyEvent}
-                                    placeholder="6-digit access code"
+                                    placeholder="Code d'accès à 6 chiffres"
                                     className="main-input-field equal-width"
                                 />
                                 <IconButton
                                     disabled={!isValidRoomCode(this.state.roomCode) || !this.state.playerName.trim()}
                                     icon={EmojiPeople}
                                     variant="warning"
-                                    label="Join"
+                                    label="Rejoindre"
                                     buttonClassName="equal-width"
                                     buttonStyle={{ width: "100%", maxWidth: "18rem" }}
                                     onClick={this.startGame}
@@ -143,13 +143,13 @@ class Main extends Component {
                                 <IconButton
                                     link="/host"
                                     icon={PresentToAll}
-                                    label="Host a quiz"
+                                    label="Héberger un quiz"
                                     buttonClassName="qm-fixed-bottom qm-fixed-left"
                                 />
                                 <IconButton
                                     link="/presenter"
                                     icon={PresentToAll}
-                                    label="Present a quiz"
+                                    label="Présenter un quiz"
                                     buttonClassName="qm-fixed-bottom"
                                     style={{ marginLeft: '120px' }}
                                 />

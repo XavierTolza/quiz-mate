@@ -8,10 +8,10 @@ import "../../assets/icons/material-ui-icon.css";
 class NicknameIsTaken extends Component {
     render() {
         return (
-            <CenterBox logo cancel="Return to menu" {...this.props}>
+            <CenterBox logo cancel="Retour au menu" {...this.props}>
                 <img src={Warning} className="material-ui-icon" style={{ fontSize: "4.5em" }} alt="Add" />
                 <div className="message-box">
-                    Name "{this.props.game.playerName}" is already taken - choose another!
+                    Le nom "{this.props.game.playerName}" est déjà pris - choisissez-en un autre !
                 </div>
             </CenterBox>
         );

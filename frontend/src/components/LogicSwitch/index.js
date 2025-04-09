@@ -38,14 +38,14 @@ class LogicSwitch extends Component {
                         onClick={this.changeValueToFalse}
                         style={this.switchButtonStyle}
                     >
-                        {this.props.offText ? this.props.offText : "OFF"}
+                        {this.props.offText ? this.props.offText : "NON"}
                     </Button>
                     <Button
                         variant={this.state.value ? "secondary" : "light"}
                         onClick={this.changeValueToTrue}
                         style={this.switchButtonStyle}
                     >
-                        {this.props.onText ? this.props.onText : "ON"}
+                        {this.props.onText ? this.props.onText : "OUI"}
                     </Button>
                 </ButtonGroup>
             </div>

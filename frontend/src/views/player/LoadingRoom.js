@@ -4,9 +4,9 @@ import CenterBox from "../../components/CenterBox";
 class LoadingRoom extends Component {
     render() {
         return (
-            <CenterBox cancel="Cancel" {...this.props}>
+            <CenterBox cancel="Retour au menu" {...this.props}>
                 <div className="message-box">
-                    Connecting with the room...
+                    Recherche de la salle...
                 </div>
             </CenterBox>
         );

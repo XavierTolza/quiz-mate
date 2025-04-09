@@ -142,7 +142,7 @@ class Question extends Component {
                 <Row>
                     <Col md={{ span: 4, order: 1 }} sm={{ span: 6, order: 2 }} xs={{ span: 6, order: 2 }}>
                         <div className="question-counter">
-                            Question: {this.props.questionIndex + 1} / {this.props.lastIndexNumber}
+                            Question : {this.props.questionIndex + 1} / {this.props.lastIndexNumber}
                         </div>
                     </Col>
                     <Col md={{ span: 4, order: 2 }} sm={{ span: 12, order: 1 }} xs={{ span: 12, order: 1 }}>
@@ -150,7 +150,7 @@ class Question extends Component {
                     </Col>
                     <Col md={{ span: 4, order: 3 }} sm={{ span: 6, order: 3 }} xs={{ span: 6, order: 3 }}>
                         <div className="question-answers-counter">
-                            Answers: {this.props.answerCount} / {this.props.connectedUsers}
+                            Réponses : {this.props.answerCount} / {this.props.connectedUsers}
                         </div>
                     </Col>
                 </Row>
@@ -183,7 +183,7 @@ class Question extends Component {
 
     renderStopRoundButton(phase) {
         const style = Phase.GUESSING === phase ? ButtonStyle.ACTIVE : ButtonStyle.DISABLED;
-        return this.renderControlButton(PausePresentation, "Stop", "round", style, this.onStopButton);
+        return this.renderControlButton(PausePresentation, "Arrêter", "tour", style, this.onStopButton);
     }
 
     renderRevealAnswerButton(phase) {
@@ -194,7 +194,7 @@ class Question extends Component {
             this.props.changeTab(TAB_REVEAL_ANSWER);
             this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_REVEAL_ANSWER);
         };
-        return this.renderControlButton(CheckBox, "Reveal", "answer", style, onClick);
+        return this.renderControlButton(CheckBox, "Révéler", "réponse", style, onClick);
     }
 
     renderAnswerStatsButton(phase) {
@@ -206,7 +206,7 @@ class Question extends Component {
             this.props.socket.emit(answerStatsRequest, this.props.game.hostingRoom.roomCode);
             this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_ANSWER_STATS);
         };
-        return this.renderControlButton(Assessment, "Answer", "stats", style, onClick);
+        return this.renderControlButton(Assessment, "Voir", "statistiques", style, onClick);
     }
 
     renderLeaderboardButton(phase) {
@@ -222,7 +222,7 @@ class Question extends Component {
                 this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_LEADERBOARD);
             }
         };
-        return this.renderControlButton(EmojiEvents, "Leader-", "board", style, onClick);
+        return this.renderControlButton(EmojiEvents, "Tableau", "score", style, onClick);
     }
 
     renderLookAtBrowserButton(phase) {
@@ -232,15 +232,15 @@ class Question extends Component {
             ? ButtonStyle.ACTIVE
             : ButtonStyle.DISABLED;
         const onClick = () => this.props.changeTab(TAB_LOOK_DOWN);
-        return this.renderControlButton(LookAtBrowser, "Look at", "browser", style, onClick);
+        return this.renderControlButton(LookAtBrowser, "Regardez", "navigateur", style, onClick);
     }
 
     renderNextButton(phase) {
         const style = Phase.GUESSING === phase ? ButtonStyle.DISABLED : ButtonStyle.ACTIVE;
         if (!this.props.isLastQuestion) {
-            return this.renderControlButton(ArrowForward, "Next", "question", style, this.onNextButton);
+            return this.renderControlButton(ArrowForward, "Question", "suivante", style, this.onNextButton);
         } else {
-            return this.renderControlButton(ArrowForward, "Leader-", "board", style, this.endQuiz);
+            return this.renderControlButton(ArrowForward, "Tableau", "score", style, this.endQuiz);
         }
     }
 
@@ -301,17 +301,17 @@ class Question extends Component {
 
     renderLookDown(phase) {
         if (Phase.NOT_STARTED === phase || this.props.questionTab === TAB_LOOK_DOWN) {
-            const index = Phase.NOT_STARTED === phase ? "first" : "next";
+            const index = Phase.NOT_STARTED === phase ? "première" : "prochaine";
             return (
                 <div style={{ fontSize: "1.25em" }}>
                     <div style={{ marginBottom: "2vh" }}>
-                        Look at your browser or phone.
+                        Regardez votre navigateur ou téléphone.
                     </div>
                     <div style={{ fontSize: "4em" }}>
-                        <img src={LookAtBrowser} className="material-ui-icon" alt="Look at browser or phone" />
+                        <img src={LookAtBrowser} className="material-ui-icon" alt="Regardez le navigateur ou téléphone" />
                     </div>
                     <div style={{ marginTop: "2vh", marginBottom: "2em" }}>
-                        The {index} question is coming up...
+                        La {index} question arrive...
                     </div>
                 </div>
             );
@@ -323,7 +323,7 @@ class Question extends Component {
     render() {
         const phase = this.getPhase();
         return (
-            <CenterBox logo cancel="End quiz" closeRoomSignal renderJoinInfo {...this.props}>
+            <CenterBox logo cancel="Terminer le quiz" closeRoomSignal renderJoinInfo {...this.props}>
                 <div style={{ marginBottom: "2em" }}>
                     {this.renderQuestion(phase)}
                     {this.renderLeaderboard(phase)}

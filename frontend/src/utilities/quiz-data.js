@@ -5,36 +5,36 @@ import { TEN } from "./constants";
 //----------------------------------------------------------------------------------------------------------------------
 
 export const SAMPLE_QUIZ = {
-    "title": "Sample quiz",
+    "title": "Quiz exemple",
     "questions": [
         {
-            "question": "Which continent has only one country?",
+            "question": "Quel continent n'a qu'un seul pays ?",
             "correct": 2,
             "answers": [
-                "Africa",
-                "Asia",
-                "Australia",
-                "South America"
+                "Afrique",
+                "Asie",
+                "Australie",
+                "Amérique du Sud"
             ]
         },
         {
-            "question": "Which vegetable gives Popeye his strength?",
+            "question": "Quel légume donne sa force à Popeye ?",
             "correct": 3,
             "answers": [
-                "Asparagus",
-                "Broccoli",
-                "Lentils",
-                "Spinach"
+                "Asperge",
+                "Brocoli",
+                "Lentilles",
+                "Épinards"
             ]
         },
         {
-            "question": "The head of which country resides at number 10 Downing Street?",
+            "question": "Le chef de quel pays réside au 10 Downing Street ?",
             "correct": 3,
             "answers": [
-                "Brazil",
+                "Brésil",
                 "Canada",
                 "Nigeria",
-                "United Kingdom"
+                "Royaume-Uni"
             ]
         }
     ]
@@ -83,13 +83,13 @@ export function validateQuiz(quiz) {
 
 function validateTitle(quiz) {
     if (!Object.prototype.hasOwnProperty.call(quiz, "title")) {
-        fail("The quiz has no title");
+        fail("Le quiz n'a pas de titre");
     }
     if ("string" !== typeof quiz.title) {
-        fail(`The title has a wrong data type (${typeof quiz.title} instead of string)`);
+        fail(`Le titre a un type de données incorrect (${typeof quiz.title} au lieu de string)`);
     }
     if (!quiz.title.trim()) {
-        fail("The title is empty");
+        fail("Le titre est vide");
     }
 }
 
@@ -99,13 +99,13 @@ function validateTitle(quiz) {
 
 function validateQuestions(quiz) {
     if (!Object.prototype.hasOwnProperty.call(quiz, "questions")) {
-        fail("The quiz has no questions");
+        fail("Le quiz n'a pas de questions");
     }
     if (!Array.isArray(quiz.questions)) {
-        fail("The questions are not an array");
+        fail("Les questions ne sont pas un tableau");
     }
     if (!quiz.questions.length) {
-        fail("The quiz does not contain any questions");
+        fail("Le quiz ne contient aucune question");
     }
     quiz.questions.forEach(validateQuestion);
 }
@@ -118,13 +118,13 @@ function validateQuestion(question, index) {
     const questionNumber = toOrdinal(index);
 
     if (!question || "object" !== typeof question || Array.isArray(question)) {
-        fail(`The ${questionNumber} question has an invalid format (it's not an object)`);
+        fail(`La ${questionNumber} question a un format invalide (ce n'est pas un objet)`);
     }
     const questionReference = "string" === typeof question.question && question.question.trim()
         ? `question "${question.question.trim()}"`
-        : `the ${questionNumber} question`;
+        : `la ${questionNumber} question`;
     if ("string" !== typeof question.question || !question.question.trim()) {
-        fail(`${capitalize(questionReference)} has no question text`);
+        fail(`${capitalize(questionReference)} n'a pas de texte de question`);
     }
     validateAnswers(questionReference, question.answers);
     validateCorrect(questionReference, question);
@@ -136,20 +136,20 @@ function validateQuestion(question, index) {
 
 function validateAnswers(questionReference, answers) {
     if (!answers || (Array.isArray(answers) && !answers.length)) {
-        fail(`${capitalize(questionReference)} has no answers`);
+        fail(`${capitalize(questionReference)} n'a pas de réponses`);
     }
     if (!Array.isArray(answers)) {
-        fail(`The answers for ${questionReference} have an invalid type (${typeof answers} instead of array)`);
+        fail(`Les réponses pour ${questionReference} ont un type invalide (${typeof answers} au lieu de tableau)`);
     }
     answers.forEach((answer, index) => {
         const answerReference = "string" === typeof answer && answer.trim()
-            ? `Answer "${answer.trim()}" answer for ${questionReference}`
-            : `The ${toOrdinal(index)} answer for ${questionReference}`;
+            ? `Réponse "${answer.trim()}" pour ${questionReference}`
+            : `La ${toOrdinal(index)} réponse pour ${questionReference}`;
         if ("string" !== typeof answer) {
-            fail(`${answerReference} has an invalid type (${typeof answer} instead of string)`);
+            fail(`${answerReference} a un type invalide (${typeof answer} au lieu de string)`);
         }
         if (!answer.trim()) {
-            fail(`${answerReference} is empty`);
+            fail(`${answerReference} est vide`);
         }
     });
 }
@@ -160,21 +160,21 @@ function validateAnswers(questionReference, answers) {
 
 function validateCorrect(questionReference, question) {
     if (!Object.prototype.hasOwnProperty.call(question, "correct")) {
-        fail(`${capitalize(questionReference)} lacks the "correct" property`);
+        fail(`${capitalize(questionReference)} n'a pas la propriété "correct"`);
     }
     if ("number" !== typeof question.correct) {
         fail([
-            `The "correct" property of ${questionReference} has an invalid type`,
-            `(${typeof question.correct} instead of number)`
+            `La propriété "correct" de ${questionReference} a un type invalide`,
+            `(${typeof question.correct} au lieu de number)`
         ].join(" "));
     }
     if (question.correct < 0) {
-        fail(`The "correct" property of ${questionReference} is less than zero (value: ${question.correct})`);
+        fail(`La propriété "correct" de ${questionReference} est inférieure à zéro (valeur : ${question.correct})`);
     }
     if (question.answers.length < question.correct) {
         fail([
-            `${capitalize(questionReference)} has only ${question.answers.length} answers`,
-            ` but marks the ${toOrdinal(question.correct)} as the correct one`
+            `${capitalize(questionReference)} n'a que ${question.answers.length} réponses`,
+            ` mais marque la ${toOrdinal(question.correct)} comme la bonne`
         ].join(" "));
     }
 }

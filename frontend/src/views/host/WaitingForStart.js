@@ -26,7 +26,7 @@ class WaitingForStart extends Component {
     render() {
         const copyButtonClass = canCopyToClipboard() ? "qm-join-info-copy-button" : "qm-join-info-copy-button-disabled";
         return (
-            <CenterBox logo cancel="Cancel the quiz" closeRoomSignal {...this.props}>
+            <CenterBox logo cancel="Annuler le quiz" closeRoomSignal {...this.props}>
                 <div className="message-box">
                     <Container>
                         <Row>
@@ -35,11 +35,11 @@ class WaitingForStart extends Component {
                             <Col sm={12} md={12} lg={8} >
                                 <div className="qm-join-info">
                                     <div className="qm-join-info-quiz-title">
-                                        Join {
+                                        Rejoindre {
                                             this.props.game.hostingRoom.title
                                                 ? `"${this.props.game.hostingRoom.title}"`
-                                                : "the quiz"
-                                        } at
+                                                : "le quiz"
+                                        } à
                                     </div>
                                     <div className="qm-join-info-url-and-copy-button qm-join-info-spacing-top">
                                         <div className="qm-join-info-url qm-join-info-highlight">
@@ -56,7 +56,7 @@ class WaitingForStart extends Component {
                                     <div className="qm-join-info-details qm-join-info-spacing-top">
                                         <div className="qm-join-info-text-details qm-join-info-filler">
                                             <div>
-                                                Code:
+                                                Code :
                                             </div>
                                             <div className="qm-join-info-room-code-container qm-join-info-spacing-top">
                                                 <div className="qm-join-info-room-code qm-join-info-highlight">
@@ -67,20 +67,20 @@ class WaitingForStart extends Component {
                                             <div className="qm-join-info-filler">
                                             </div>
                                             <div className="qm-join-info-space-above">
-                                                Players: {this.props.connectedUsers}
+                                                Joueurs : {this.props.connectedUsers}
                                             </div>
                                             <div className="qm-join-info-spacing-top" style={{ display: 'flex', gap: '10px' }}>
                                                 <IconButton
                                                     icon={PlayCircleOutline}
                                                     variant="warning"
-                                                    label="Start the quiz"
+                                                    label="Démarrer le quiz"
                                                     labelStyle={{ fontSize: "1.2em" }}
                                                     onClick={this.props.onStartQuiz}
                                                 />
                                                 <IconButton
                                                     icon={EmojiPeople}
                                                     variant="info"
-                                                    label="Open Presenter View"
+                                                    label="Ouvrir la vue présentateur"
                                                     labelStyle={{ fontSize: "1.2em" }}
                                                     onClick={this.openPresenterView}
                                                 />

@@ -14,31 +14,31 @@ class Waiting extends Component {
             if (this.props.correctAnswer != null) {
                 if (this.props.selectedAnswer === this.props.correctAnswer) {
                     return (
-                        <CenterBox logo cancel="Exit" {...this.props}>
+                        <CenterBox logo cancel="Quitter" {...this.props}>
                             <img
                                 src={InsertEmoticon}
                                 className="material-ui-icon"
                                 style={{ fontSize: "4.0em" }}
-                                alt="Correct answer"
+                                alt="Bonne réponse"
                             />
                             <div className="message-box">
-                                <p>You are right.</p>
-                                <p>Congratulations!</p>
+                                <p>Vous avez raison.</p>
+                                <p>Félicitations !</p>
                             </div>
                         </CenterBox>
                     );
                 } else {
                     return (
-                        <CenterBox logo cancel="Exit" {...this.props}>
+                        <CenterBox logo cancel="Quitter" {...this.props}>
                             <img
                                 src={SentimentVeryDissatisfied}
                                 className="material-ui-icon"
                                 style={{ fontSize: "4.0em" }}
-                                alt="Wrong answer"
+                                alt="Mauvaise réponse"
                             />
                             <div className="message-box">
-                                <p>No points this time around.</p>
-                                <p>The right answer is:</p>
+                                <p>Pas de points cette fois-ci.</p>
+                                <p>La bonne réponse est :</p>
                                 <p>{this.props.question.answers[this.props.question.correct]}</p>
                             </div>
                         </CenterBox>
@@ -46,18 +46,18 @@ class Waiting extends Component {
                 }
             } else {
                 return (
-                    <CenterBox logo cancel="Exit" {...this.props}>
+                    <CenterBox logo cancel="Quitter" {...this.props}>
                         <img
                             src={PauseCircleOutline}
                             className="material-ui-icon"
                             style={{ fontSize: "4.0em" }}
-                            alt="Waiting"
+                            alt="En attente"
                         />
                         <div className="message-box">
-                            <p>You have selected</p>
+                            <p>Vous avez choisi</p>
                             <p>"{this.props.question.answers[this.props.selectedAnswer]}"</p>
                             <br />
-                            <p>Waiting for the host to<br />reveal the right answer...</p>
+                            <p>En attente que l'hôte<br />révèle la bonne réponse...</p>
                         </div>
                     </CenterBox>
                 );
@@ -66,24 +66,24 @@ class Waiting extends Component {
             const joinMessage = this.props.game.hostingRoom.title
                 ? (
                     <div>
-                        <p>You have joined</p>
+                        <p>Vous avez rejoint</p>
                         <p>"{this.props.game.hostingRoom.title.trim()}"</p>
                     </div>
                 )
                 : (
-                    <p>You have joined the quiz.</p>
+                    <p>Vous avez rejoint le quiz.</p>
                 );
             return (
-                <CenterBox logo cancel="Exit" {...this.props}>
+                <CenterBox logo cancel="Quitter" {...this.props}>
                     <img
                         src={CheckCircleOutline}
                         className="material-ui-icon"
                         style={{ fontSize: "4.0em" }}
-                        alt="Waiting"
+                        alt="En attente"
                     />
                     <div className="message-box">
                         {joinMessage}
-                        <p>Waiting for the next question...</p>
+                        <p>En attente de la prochaine question...</p>
                     </div>
                 </CenterBox>
             );

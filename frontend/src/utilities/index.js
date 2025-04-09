@@ -28,7 +28,7 @@ export function formatSpeed(duration, points) {
         const average = Math.round(duration / points);
         const sec = Math.floor(average / MS_PER_SEC);
         const ms = `${average - MS_PER_SEC * sec}`;
-        return [`${sec}`, ".", TRIPLE_ZERO.substring(0, TRIPLE_ZERO.length - ms.length), ms, " seconds"].join("");
+        return [`${sec}`, ",", TRIPLE_ZERO.substring(0, TRIPLE_ZERO.length - ms.length), ms, " secondes"].join("");
     }
 }
 
@@ -92,15 +92,15 @@ let hasInstalledOnBeforeUnloadListener = false;
 export function onHostStartGame(title) {
     document.title = title || "Quiz Mate";
     beforeUnloadWarning = [
-        "You are you sure you want to exit?",
-        "This will abort the quiz you're currently hosting.",
-        "You won't be able to re-join as the host."
+        "Êtes-vous sûr de vouloir quitter ?",
+        "Cela annulera le quiz que vous hébergez actuellement.",
+        "Vous ne pourrez pas le rejoindre à nouveau en tant qu'hôte."
     ].join(" ");
 }
 
 export function onPlayerJoinGame(title) {
     document.title = title || "Quiz Mate";
-    beforeUnloadWarning = "Are you sure you want to exit the the quiz?";
+    beforeUnloadWarning = "Êtes-vous sûr de vouloir quitter le quiz ?";
 }
 
 export function onExitGame() {

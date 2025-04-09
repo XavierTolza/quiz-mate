@@ -204,7 +204,7 @@ class Presenter extends Component {
                     <CenterBox>
                         <div className="message-box">
                             <div style={{ textAlign: 'center' }}>
-                                <h3>Scan to join the quiz</h3>
+                                <h3>Scannez pour rejoindre le quiz</h3>
                                 <div style={{ marginTop: '20px' }}>
                                     <QRCodeCanvas 
                                         value={joinUrl}
@@ -215,7 +215,7 @@ class Presenter extends Component {
                                     />
                                 </div>
                                 <div style={{ marginTop: '20px' }}>
-                                    <h4>Room code: {this.props.game.hostingRoom.roomCode}</h4>
+                                    <h4>Code de la salle : {this.props.game.hostingRoom.roomCode}</h4>
                                 </div>
                                 <h3>
                                     {joinUrl}
@@ -238,7 +238,7 @@ class Presenter extends Component {
                 return (
                     <CenterBox>
                         <div className="message-box">
-                            Quiz completed!
+                            Quiz terminé !
                             {this.state.generalRanking && (
                                 <div className="final-leaderboard">
                                     <RankTable data={this.state.generalRanking} showHeader={true} />

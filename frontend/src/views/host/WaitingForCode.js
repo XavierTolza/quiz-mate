@@ -5,9 +5,9 @@ import CenterBox from "../../components/CenterBox";
 class WaitingForCode extends Component {
     render() {
         return (
-            <CenterBox logo cancel="Cancel" {...this.props}>
+            <CenterBox logo cancel="Retour" {...this.props}>
                 <div className="message-box">
-                    Connecting...
+                    <p>Création de la salle...</p>
                 </div>
             </CenterBox>
         );

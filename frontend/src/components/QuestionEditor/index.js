@@ -53,7 +53,7 @@ class QuestionEditor extends Component {
         const file = event.target.files[0];
         if (file) {
             if (file.size > MAX_IMAGE_SIZE) {
-                alert("Image size must be less than 5MB");
+                alert("La taille de l'image doit être inférieure à 5 Mo");
                 return;
             }
 
@@ -91,7 +91,7 @@ class QuestionEditor extends Component {
                         <Button variant="secondary" onClick={this.getMarkCorrectAnswerCallback(answer)}>
                             <img src={answer === this.props.question.correct ? CheckBox : CheckBoxOutlineBlank}
                                 className="material-ui-icon answer-checkbox"
-                                alt="Mark as correct answer" />
+                                alt="Marquer comme bonne réponse" />
                             <span className="answer-letter">{toLetter(answer)}</span>
                         </Button>
                         <Form.Control type="text"
@@ -123,8 +123,8 @@ class QuestionEditor extends Component {
                 <div className="image-controls">
                     <InputGroup>
                         <Button variant="secondary" as="label" htmlFor="image-upload">
-                            <img src={ImageIcon} className="material-ui-icon" alt="Upload image" />
-                            <span>Upload Image</span>
+                            <img src={ImageIcon} className="material-ui-icon" alt="Importer une image" />
+                            <span>Importer une Image</span>
                         </Button>
                         <input
                             id="image-upload"
@@ -135,14 +135,14 @@ class QuestionEditor extends Component {
                         />
                         {question.imageUrl && (
                             <Button variant="danger" onClick={this.removeImage}>
-                                Remove Image
+                                Supprimer l'Image
                             </Button>
                         )}
                     </InputGroup>
                 </div>
                 {question.imageUrl && (
                     <div className="image-preview">
-                        <img src={question.imageUrl} alt="Question" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+                        <img src={question.imageUrl} alt="Image de la question" style={{ maxWidth: '100%', maxHeight: '300px' }} />
                     </div>
                 )}
             </Row>
@@ -170,14 +170,14 @@ class QuestionEditor extends Component {
         } else {
             return (
                 <div style={{ margin: '40px auto 0 10px', textAlign: "left", fontSize: "1.2rem" }}>
-                    <p>Use this editor to create or modify a quiz:</p>
+                    <p>Utilisez cet éditeur pour créer ou modifier un quiz :</p>
                     <ul>
-                        <li>Upload a quiz (if you have one)</li>
-                        <li>Use the buttons above to add questions</li>
-                        <li>Switch between questions on the left side</li>
+                        <li>Importez un quiz (si vous en avez un)</li>
+                        <li>Utilisez les boutons ci-dessus pour ajouter des questions</li>
+                        <li>Changez entre les questions sur le côté gauche</li>
                     </ul>
-                    <p>Quizzes are NOT saved on the server!</p>
-                    <p style={{ color: "red", fontWeight: "bold" }} >You must download the quiz when finished.</p>
+                    <p>Les quiz ne sont PAS sauvegardés sur le serveur !</p>
+                    <p style={{ color: "red", fontWeight: "bold" }} >Vous devez télécharger le quiz une fois terminé.</p>
                 </div>
             );
         }

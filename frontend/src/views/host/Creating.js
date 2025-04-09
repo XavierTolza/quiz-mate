@@ -83,7 +83,7 @@ class Creating extends Component {
             } catch (error) {
                 this.setState({ questions: [], title: "" });
                 const message = error instanceof Error ? error.message : `${error}`;
-                alert(`Invalid file format: ${message}`);
+                alert(`Format de fichier invalide : ${message}`);
             }
             this.inputFile.current.value = "";
         };
@@ -105,14 +105,14 @@ class Creating extends Component {
         } catch (error) {
             this.setState({ questions: [], title: "" });
             const message = error instanceof Error ? error.message : `${error}`;
-            alert(`Invalid file format: ${message}`);
+            alert(`Format de fichier invalide : ${message}`);
         }
     };
 
     render() {
         return (
             <div>
-                <CenterBox logo cancel="Back" {...this.props} cancelIcon={ArrowBack} showGitHubLink>
+                <CenterBox logo cancel="Retour" {...this.props} cancelIcon={ArrowBack} showGitHubLink>
                     <div className="message-box">
                         <form>
                             <Container>
@@ -120,11 +120,11 @@ class Creating extends Component {
                                     <Col md={12} className="vcenter">
                                         <div>
                                             <TimePicker value={this.state.timeLimit}
-                                                min={0} max={300} zeroText="No time limit"
+                                                min={0} max={300} zeroText="Pas de limite de temps"
                                                 onChange={this.onSetTimeLimit} />
                                             <div className="sort-order-buttons" style={{ marginTop: "2.5rem" }}>
                                                 <LogicSwitch value={this.state.randomOrder}
-                                                    offText="Ordered" onText="Shuffled"
+                                                    offText="Ordonné" onText="Aléatoire"
                                                     onChange={this.onSetOrderedOrShuffled} />
                                             </div>
                                             <div style={{ marginTop: "2.5rem" }}>
@@ -136,8 +136,8 @@ class Creating extends Component {
                                                         src={Publish}
                                                         className="material-ui-icon"
                                                         style={{ filter: "none" }}
-                                                        alt="Upload quiz"
-                                                    /> Upload quiz
+                                                        alt="Importer le quiz"
+                                                    /> Importer un quiz
                                                     <input
                                                         type="file"
                                                         accept="application/json"
@@ -152,7 +152,7 @@ class Creating extends Component {
                                                 marginTop: "6em",
                                                 marginBottom: "-6em"
                                             }}>
-                                                ...or use this
+                                                ...ou utilisez ce
                                                 <button
                                                     onClick={this.startSampleQuiz}
                                                     style={{
@@ -165,7 +165,7 @@ class Creating extends Component {
                                                         color: "white"
                                                     }}
                                                 >
-                                                    sample quiz
+                                                    quiz exemple
                                                 </button>
                                             </div>
                                         </div>
@@ -177,7 +177,7 @@ class Creating extends Component {
                     <ButtonGroup className="main-footer-btn">
                         <IconButton
                             icon={Edit}
-                            label="Quiz editor"
+                            label="Éditeur de quiz"
                             buttonClassName="qm-fixed-bottom qm-fixed-left"
                             link="/editor"
                         />

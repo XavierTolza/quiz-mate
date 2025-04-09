@@ -44,7 +44,7 @@ class RankTable extends Component {
     }
 
     onDownload() {
-        const header = `"Place", "Player", "Points", "Speed (seconds per answer)"`;
+        const header = `"Place", "Joueur", "Points", "Vitesse (secondes par réponse)"`;
         const rows = this.getSortedRows().map(this.mapRowToCsv).join("\n");
         fileDownload(`${header}\n${rows}\n`, "quiz.csv");
     }
@@ -68,14 +68,14 @@ class RankTable extends Component {
                         <Col xs={6} style={{ textAlign: "left", paddingLeft: "0" }}>
                             <LogicSwitch
                                 value={this.state.orderByName}
-                                offText="Order by points"
-                                onText="Order by name"
+                                offText="Trier par points"
+                                onText="Trier par nom"
                                 onChange={this.onChangeSortOrder}
                             />
                         </Col>
                         <Col xs={6} style={{ textAlign: "right", paddingRight: "0" }}>
                             <Button variant="secondary" onClick={this.onDownload}>
-                                Export to CSV file
+                                Exporter en CSV
                             </Button>
                         </Col>
                     </Row>
@@ -92,9 +92,9 @@ class RankTable extends Component {
                 <thead>
                     <tr>
                         <th>Place</th>
-                        <th>Player</th>
+                        <th>Joueur</th>
                         <th>Points</th>
-                        <th>Answer speed</th>
+                        <th>Vitesse</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,4 +118,4 @@ class RankTable extends Component {
     }
 }
 
-export default RankTable;;
+export default RankTable;
