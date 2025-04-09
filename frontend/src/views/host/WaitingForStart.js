@@ -8,6 +8,7 @@ import IconButton from "../../components/IconButton";
 import { canCopyToClipboard, getServerBaseUrl, getServerJoinPath, getServerJoinUrl } from "../../utilities";
 
 import PlayCircleOutline from "../../assets/icons/play_circle_outline.svg";
+import EmojiPeople from "../../assets/icons/emoji_people.svg";
 
 import "./WaitingForStart.css";
 
@@ -17,6 +18,10 @@ function selectUrl() {
 }
 
 class WaitingForStart extends Component {
+    openPresenterView = () => {
+        const presenterUrl = `/#/presenter?code=${this.props.game.hostingRoom.roomCode}`;
+        window.open(presenterUrl, '_blank');
+    };
 
     render() {
         const copyButtonClass = canCopyToClipboard() ? "qm-join-info-copy-button" : "qm-join-info-copy-button-disabled";
@@ -64,7 +69,7 @@ class WaitingForStart extends Component {
                                             <div className="qm-join-info-space-above">
                                                 Players: {this.props.connectedUsers}
                                             </div>
-                                            <div className="qm-join-info-spacing-top">
+                                            <div className="qm-join-info-spacing-top" style={{ display: 'flex', gap: '10px' }}>
                                                 <IconButton
                                                     icon={PlayCircleOutline}
                                                     variant="warning"
@@ -72,10 +77,17 @@ class WaitingForStart extends Component {
                                                     labelStyle={{ fontSize: "1.2em" }}
                                                     onClick={this.props.onStartQuiz}
                                                 />
+                                                <IconButton
+                                                    icon={EmojiPeople}
+                                                    variant="info"
+                                                    label="Open Presenter View"
+                                                    labelStyle={{ fontSize: "1.2em" }}
+                                                    onClick={this.openPresenterView}
+                                                />
                                             </div>
                                         </div>
                                         <div className="qm-join-info-qr-code">
-                                            <QRCodeCanvas value={this.getUrlWithRoomCode}
+                                            <QRCodeCanvas value={getServerJoinUrl(this.props.game.hostingRoom.roomCode)}
                                                 size={300}
                                                 includeMargin
                                                 bgColor="#ffffff"
@@ -90,7 +102,7 @@ class WaitingForStart extends Component {
                         </Row>
                     </Container>
                 </div>
-            </CenterBox >
+            </CenterBox>
         );
     }
 }

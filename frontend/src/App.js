@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { HashRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes, useParams, useSearchParams } from "react-router-dom";
 
 import { onExitGame } from "./utilities";
 import Editor from "./views/editor";
@@ -24,6 +24,12 @@ const MainOrNotFound = () => { // NOSONAR
         : <Navigate replace to="/404" />;
 };
 
+const PresenterWithSearch = () => {
+    const [searchParams] = useSearchParams();
+    const code = searchParams.get('code');
+    return code ? <JoinPresenter prefilledCode={code} autoJoin={true} /> : <JoinPresenter />;
+};
+
 function normalizeHash() {
     const hash = (window.location.hash || "").trim().replace(/^#/, "").trim();
     if (hash && !hash.startsWith("/")) {
@@ -41,7 +47,7 @@ function App() {
                     <Route exact path="/host" name="Host mode" element={<Host />} />
                     <Route exact path="/editor" name="Question editor" element={<Editor />} />
                     <Route exact path="/player" name="Player mode" element={<Player />} />
-                    <Route exact path="/presenter" name="Join as Presenter" element={<JoinPresenter />} />
+                    <Route exact path="/presenter" name="Join as Presenter" element={<PresenterWithSearch />} />
                     <Route exact path="/presenter/view" name="Presenter mode" element={<Presenter />} />
                     <Route exact path="/404" name="Page not found" element={<Page404 />} />
                     <Route path="/:roomCode" name="Main (pre-populated)" element={<MainOrNotFound />} />

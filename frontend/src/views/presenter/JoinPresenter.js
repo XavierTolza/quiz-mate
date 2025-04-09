@@ -1,6 +1,6 @@
 import { Component, createRef } from "react";
 import { Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { setPlayerConfigAC, switchStateAC } from "../../actions/game";
@@ -14,7 +14,7 @@ class JoinPresenter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomCode: "",
+            roomCode: props.prefilledCode || "",
         };
         this.roomCodeReference = createRef();
         this.onInputFieldKeyEvent = this.onInputFieldKeyEvent.bind(this);
@@ -25,7 +25,11 @@ class JoinPresenter extends Component {
     componentDidMount() {
         this.props.switchState("");
         this.props.setPlayerConfig("", "", false);
-        if (isValidRoomCode(this.props.roomCode)) {
+
+        if (this.props.prefilledCode && this.props.autoJoin && isValidRoomCode(this.props.prefilledCode)) {
+            // Auto-join avec le code fourni
+            this.joinSession();
+        } else if (isValidRoomCode(this.props.roomCode)) {
             this.setState({ roomCode: `${this.props.roomCode}` }, () => this.roomCodeReference.current.focus());
         } else {
             this.roomCodeReference.current.focus();
@@ -87,16 +91,20 @@ class JoinPresenter extends Component {
 }
 
 const mapStateToProps = state => ({
-    game: state.game,
+    game: state.game
 });
 
 const mapDispatchToProps = dispatch => ({
     switchState: (...args) => dispatch(switchStateAC(...args)),
-    setPlayerConfig: (...args) => dispatch(setPlayerConfigAC(...args)),
+    setPlayerConfig: (...args) => dispatch(setPlayerConfigAC(...args))
 });
 
 const ConnectedJoinPresenter = connect(mapStateToProps, mapDispatchToProps)(JoinPresenter);
 
-const ConnectedJoinPresenterWithNavigate = props => (<ConnectedJoinPresenter {...props} navigate={useNavigate()} />);
+const ConnectedJoinPresenterWithRouter = props => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    return <ConnectedJoinPresenter {...props} navigate={navigate} location={location} />;
+};
 
-export default ConnectedJoinPresenterWithNavigate;
+export default ConnectedJoinPresenterWithRouter;

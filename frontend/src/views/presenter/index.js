@@ -85,7 +85,7 @@ class Presenter extends Component {
             this.socket.on(timerSync, value => this.setState({ timerValue: value }));
 
             this.socket.on(answerStatsResponse, stats => {
-                this.setState({ answerStats: stats, revealStats: true });
+                this.setState({ answerStats: stats });
             });
 
             this.socket.on(generalRankingResponse, ranking => {
@@ -114,17 +114,22 @@ class Presenter extends Component {
     }
 
     StatProgressBar(answer) {
+        if (!this.state.revealStats) {
+            return false;
+        }
+        
         let value = 0;
-        if (this.state.answerStats) {
+        if (this.state.answerStats && this.state.answerStats[answer] > 0) {
             const totalAnswers = this.state.answerStats.reduce((a, b) => a + b, 0);
             if (totalAnswers > 0) {
                 value = Math.round(this.state.answerStats[answer] * ONE_HUNDRED / totalAnswers);
             }
         }
-        if (this.state.questionTab === TAB_ANSWER_STATS || this.state.revealStats) {
-            return (<ProgressBar now={value} label={value + "%"} className="question-progress" />);
-        }
-        return false;
+        return (<ProgressBar 
+            now={value} 
+            label={`${this.state.answerStats ? this.state.answerStats[answer] : 0} votes (${value}%)`}
+            className="question-progress" 
+        />);
     }
 
     correctGreenBox(answer) {

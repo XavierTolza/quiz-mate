@@ -14,6 +14,8 @@ const addPointsToPlayer = (io, socket, room, player, _index, answer) => {
         roomObj.answerCount++;
         state.getHostSocket(io, room)?.emit(commands.ANSWER_COUNT_UPDATE, roomObj.answerCount);
         roomObj.answerStats[answer]++;
+        // Émettre les statistiques mises à jour à tous les clients de la room
+        io.to(room).emit(commands.ANSWER_STATS_RESPONSE, roomObj.answerStats);
         const playerObj = roomObj.players.find(item => item.nickname === player);
         if (playerObj && answer === roomObj.correctAnswer) {
             playerObj.points++;
@@ -69,6 +71,10 @@ module.exports.onWebsocketConnect = (io, socket) => {
             if (playerName === 'presenter') {
                 socket.join(roomCode);
                 socket.emit(commands.JOINED_TO_ROOM, theRoom);
+                // Send current stats to presenter if they exist
+                if (theRoom.answerStats) {
+                    socket.emit(commands.ANSWER_STATS_RESPONSE, theRoom.answerStats);
+                }
                 log(roomCode, `Presenter joined the room`);
                 return;
             }
