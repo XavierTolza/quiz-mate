@@ -75,6 +75,9 @@ module.exports.onWebsocketConnect = (io, socket) => {
                 if (theRoom.answerStats) {
                     socket.emit(commands.ANSWER_STATS_RESPONSE, theRoom.answerStats);
                 }
+                if (theRoom.players && theRoom.players.length > 0) {
+                    socket.emit(commands.GENERAL_RANKING_RESPONSE, theRoom.players);
+                }
                 log(roomCode, `Presenter joined the room`);
                 return;
             }
@@ -173,7 +176,8 @@ module.exports.onWebsocketConnect = (io, socket) => {
         const roomObj = state.getRoom(roomCode);
         if (roomObj) {
             log(roomCode, "The host requested the leaderboard");
-            socket.emit(commands.GENERAL_RANKING_RESPONSE, roomObj.players);
+            // Envoyer à tous les clients de la room, pas seulement au host
+            io.to(roomCode).emit(commands.GENERAL_RANKING_RESPONSE, roomObj.players);
         }
     });
 
