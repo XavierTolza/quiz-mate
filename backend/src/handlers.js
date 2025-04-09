@@ -65,6 +65,14 @@ module.exports.onWebsocketConnect = (io, socket) => {
     socket.on(commands.ADD_TO_ROOM, (roomCode, playerName, reconnectMode) => {
         const theRoom = state.getRoom(roomCode);
         if (theRoom) {
+            // Special case for presenter - just let them join without adding to players list
+            if (playerName === 'presenter') {
+                socket.join(roomCode);
+                socket.emit(commands.JOINED_TO_ROOM, theRoom);
+                log(roomCode, `Presenter joined the room`);
+                return;
+            }
+
             const isTaken = theRoom.players.findIndex(item => item.nickname === playerName);
             if (reconnectMode) {
                 if (isTaken >= 0) {
