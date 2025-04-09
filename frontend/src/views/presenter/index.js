@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
+import { QRCodeCanvas } from "qrcode.react";
+import { getServerJoinUrl } from "../../utilities";
 
 import { setHostingRoomAC, switchStateAC } from "../../actions/game";
 import {
@@ -197,10 +199,28 @@ class Presenter extends Component {
             case V_ROOM_NOT_FOUND:
                 return <RoomNotFound {...this.props} />;
             case V_WAITING:
+                const joinUrl = getServerJoinUrl(this.props.game.hostingRoom.roomCode);
                 return (
                     <CenterBox>
                         <div className="message-box">
-                            Waiting for the host to start...
+                            <div style={{ textAlign: 'center' }}>
+                                <h3>Scan to join the quiz</h3>
+                                <div style={{ marginTop: '20px' }}>
+                                    <QRCodeCanvas 
+                                        value={joinUrl}
+                                        size={300}
+                                        includeMargin
+                                        bgColor="#ffffff"
+                                        fgColor="#000000"
+                                    />
+                                </div>
+                                <div style={{ marginTop: '20px' }}>
+                                    <h4>Room code: {this.props.game.hostingRoom.roomCode}</h4>
+                                </div>
+                                <h3>
+                                    {joinUrl}
+                                </h3>
+                            </div>
                         </div>
                     </CenterBox>
                 );
