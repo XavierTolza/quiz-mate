@@ -26,3 +26,5 @@ export const answerStatsResponse = "ANSWER_STATS_RESPONSE";
 
 export const generalRankingRequest = "GENERAL_RANKING_REQUEST";
 export const generalRankingResponse = "GENERAL_RANKING_RESPONSE";
+
+export const presenterTabSync = "PRESENTER_TAB_SYNC";

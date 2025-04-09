@@ -40,7 +40,9 @@ module.exports.commands = {
     ANSWER_STATS_RESPONSE: "ANSWER_STATS_RESPONSE",
 
     GENERAL_RANKING_REQUEST: "GENERAL_RANKING_REQUEST",
-    GENERAL_RANKING_RESPONSE: "GENERAL_RANKING_RESPONSE"
+    GENERAL_RANKING_RESPONSE: "GENERAL_RANKING_RESPONSE",
+
+    PRESENTER_TAB_SYNC: "PRESENTER_TAB_SYNC"
 };
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Col, Container, ProgressBar, Row } from "react-boo
 import CenterBox from "../../components/CenterBox";
 import RankTable from "../../components/RankTable";
 import Timer from "../../components/Timer";
-import { answerStatsRequest, closeRoom, generalRankingRequest, timerSync } from "../../connection/config";
+import { answerStatsRequest, closeRoom, generalRankingRequest, timerSync, presenterTabSync } from "../../connection/config";
 import { toLetter } from "../../utilities";
 import { ONE_HUNDRED } from "../../utilities/constants";
 
@@ -190,7 +190,10 @@ class Question extends Component {
         const style = Phase.REVEALING !== phase || TAB_REVEAL_ANSWER === this.props.questionTab
             ? ButtonStyle.DISABLED
             : ButtonStyle.ACTIVE;
-        const onClick = () => this.props.changeTab(TAB_REVEAL_ANSWER);
+        const onClick = () => {
+            this.props.changeTab(TAB_REVEAL_ANSWER);
+            this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_REVEAL_ANSWER);
+        };
         return this.renderControlButton(CheckBox, "Reveal", "answer", style, onClick);
     }
 
@@ -201,6 +204,7 @@ class Question extends Component {
         const onClick = () => {
             this.props.changeTab(TAB_ANSWER_STATS);
             this.props.socket.emit(answerStatsRequest, this.props.game.hostingRoom.roomCode);
+            this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_ANSWER_STATS);
         };
         return this.renderControlButton(Assessment, "Answer", "stats", style, onClick);
     }
@@ -215,6 +219,7 @@ class Question extends Component {
             } else {
                 this.props.changeTab(TAB_LEADERBOARD);
                 this.props.socket.emit(generalRankingRequest, this.props.game.hostingRoom.roomCode);
+                this.props.socket.emit(presenterTabSync, this.props.game.hostingRoom.roomCode, TAB_LEADERBOARD);
             }
         };
         return this.renderControlButton(EmojiEvents, "Leader-", "board", style, onClick);

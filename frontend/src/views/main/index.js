@@ -146,6 +146,13 @@ class Main extends Component {
                                     label="Host a quiz"
                                     buttonClassName="qm-fixed-bottom qm-fixed-left"
                                 />
+                                <IconButton
+                                    link="/presenter"
+                                    icon={PresentToAll}
+                                    label="Present a quiz"
+                                    buttonClassName="qm-fixed-bottom"
+                                    style={{ marginLeft: '120px' }}
+                                />
                             </ButtonGroup>
                         </Col>
                     </Row>

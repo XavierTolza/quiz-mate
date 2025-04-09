@@ -7,6 +7,8 @@ import Host from "./views/host";
 import Main from "./views/main";
 import Page404 from "./views/page404";
 import Player from "./views/player";
+import JoinPresenter from "./views/presenter/JoinPresenter";
+import Presenter from "./views/presenter";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -39,6 +41,8 @@ function App() {
                     <Route exact path="/host" name="Host mode" element={<Host />} />
                     <Route exact path="/editor" name="Question editor" element={<Editor />} />
                     <Route exact path="/player" name="Player mode" element={<Player />} />
+                    <Route exact path="/presenter" name="Join as Presenter" element={<JoinPresenter />} />
+                    <Route exact path="/presenter/view" name="Presenter mode" element={<Presenter />} />
                     <Route exact path="/404" name="Page not found" element={<Page404 />} />
                     <Route path="/:roomCode" name="Main (pre-populated)" element={<MainOrNotFound />} />
                     <Route path="*" element={<Navigate replace to="/404" />} />

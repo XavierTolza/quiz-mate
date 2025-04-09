@@ -168,4 +168,12 @@ module.exports.onWebsocketConnect = (io, socket) => {
     //------------------------------------------------------------------------------------------------------------------
 
     socket.on("disconnect", () => log(null, `A client disconnected`));
+
+    //------------------------------------------------------------------------------------------------------------------
+    // Presenter tab sync
+    //------------------------------------------------------------------------------------------------------------------
+
+    socket.on(commands.PRESENTER_TAB_SYNC, (roomCode, tab) => {
+        socket.to(roomCode).emit(commands.PRESENTER_TAB_SYNC, tab);
+    });
 };
